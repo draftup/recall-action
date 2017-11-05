@@ -1,0 +1,47 @@
+{
+  "name": "recall-action",
+  "version": "0.0.0",
+  "description": "A subscribable function",
+  "main": "build/index.js",
+  "scripts": {
+    "test:src": "cross-env TYPE=src mocha",
+    "test:build": "cross-env TYPR=build mocha",
+    "build": "cross-env NODE_ENV=production webpack -p",
+    "pre-publish": "npm run build && npm run test:build && git add . && git commit -am 'pre-release'",
+    "publish:patch": "npm run pre-publish && npm version patch && npm publish && git push",
+    "publish:minor": "npm run pre-publish && npm version minor && npm publish && git push",
+    "publish:major": "npm run pre-publish && npm version major && npm publish && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/draftup/recall-action.git"
+  },
+  "keywords": [
+    "function",
+    "subscribe",
+    "recall"
+  ],
+  "author": "negamaxi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/draftup/recall-action/issues"
+  },
+  "homepage": "https://github.com/draftup/recall-action#readme",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "cross-env": "^5.0.5",
+    "eslint": "^4.10.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^4.0.1",
+    "recall-bucket": "0.0.2",
+    "webpack": "^3.5.4"
+  }
+}
