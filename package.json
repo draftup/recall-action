@@ -8,7 +8,6 @@
     "test:build": "cross-env TYPR=build mocha",
     "build": "cross-env NODE_ENV=production webpack -p",
     "pre-publish": "npm run build && npm run test:build && git add . && git commit -am 'pre-release'",
-    "publish:fix": "npm run pre-publish && npm publish && git push",
     "publish:patch": "npm run pre-publish && npm version patch && npm publish && git push",
     "publish:minor": "npm run pre-publish && npm version minor && npm publish && git push",
     "publish:major": "npm run pre-publish && npm version major && npm publish && git push"
