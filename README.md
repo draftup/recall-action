@@ -19,7 +19,7 @@ const action = createAction((value1, value2) => {
   return value1 + value2
 })
 
-// pass function to bucket, returns { done } object
+// any function passed to action as a first argument becomes a listener, returns object with done method to cancel subscription
 const listener1 = action((receivedValue) => {
   console.log(`listener1 logs ${receivedValue}`)
 })
