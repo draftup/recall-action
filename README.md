@@ -1,38 +1,42 @@
-Recall Bucket
+Recall Action
 =========
 
-Centralised storage for callbacks.
+Subscribable function
 
 ## Installation
 
-`npm install recall-bucket`
+```bash
+> npm install recall-action
+```
 
 ## Usage
 
 ```javascript
-import createBucket from 'recall-bucket'
+import createAction from 'recall-action'
 
-// create unit
-const bucket = createBucket()
+// create action
+const action = createAction((value1, value2) => {
+  return value1 + value2
+})
 
 // pass function to bucket, returns { done } object
-const listener1 = bucket((value) => {
-  console.log(`listener1 logs ${value}`)
+const listener1 = action((receivedValue) => {
+  console.log(`listener1 logs ${receivedValue}`)
 })
 
-// any bucket call with typeof !== 'fucntion' argument will recall every attached listener with same argument
-bucket(1)
-//> listener1 logs 1
+// any action call with typeof !== 'fucntion' first argument will recall every listener with returned value passed as a first argument
+action(2,3)
+//> listener1 logs 5
 
-const listener2 = bucket((value) => {
-  console.log(`listener2 logs ${value}`)
+const listener2 = action((receivedValue) => {
+  console.log(`listener2 logs ${receivedValue}`)
 })
 
-bucket('egg')
-//> listener1 logs egg
-//> listener2 logs egg
+action('java', 'script')
+//> listener1 logs javascript
+//> listener2 logs javascript
 
-// call done method to remove listener from bucket
+// call done method to remove listener from action
 listener1.done()
 
 bucket()
