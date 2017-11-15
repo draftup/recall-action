@@ -32,7 +32,7 @@ describe('create recall action with function argument', () => {
   it('returns a function', () => {
     const isFn = typeof createAction(() => {}) === 'function'
     if (!isFn) {
-      throw new Error('A function dhould be returned.')
+      throw new Error('A function should be returned.')
     }
   })
 })
@@ -46,7 +46,32 @@ describe('pass function to recall action', () => {
   })
 })
 
-describe('return value from recall action', () => {
+describe('pass nothing to recall action', () => {
+  it('returns default value', () => {
+    const action = createAction((payload) => {
+      const value = 5
+      if (payload) {
+        return value + payload
+      }
+      return value
+    })
+    const returnedValue = action()
+    if (returnedValue !== 5) {
+      throw new Error(`Expected 5, returned ${returnedValue}.`)
+    }
+  })
+  it('do not recalls listeners', () => {
+    const action = createAction(() => {})
+    action((value, init) => {
+      if (!init) {
+        throw new Error("Listener shouldn't be called.")
+      }
+    })
+    action()
+  })
+})
+
+describe('pass value from recall action to listener', () => {
   it('same value passed to listener', () => {
     const valueToPass = 5
     const action = createAction((value) => {

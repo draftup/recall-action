@@ -12,6 +12,9 @@ const recallAction = (action) => {
       params[0](action(), true)
       return bucket(params[0])
     }
+    if (firstParamType === 'undefined') {
+      return action()
+    }
     bucket(action(...params))
   }
   return api
